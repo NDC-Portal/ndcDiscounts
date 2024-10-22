@@ -62,13 +62,15 @@ searchBtn.addEventListener("click", function (stop) {
       (rule) => rule.ATTRIBUTE_NAME === "supplier"
     );
     let airlineMatch = true;
-    if (airlineRules.length > 0) {
+    if (airlineRules.length > 0) { // إذا كان هناك قواعد للخطوط الجوية
       const airlineValue = airlineRules[0].VALUE;
       const cleanedValue = airlineRules[0].CLEANED_CRITERIA_VALUE;
-      if (airlineValue === "IN") {
-        airlineMatch = cleanedValue.includes(airlineInput);
-      } else if (airlineValue === "NOT IN") {
-        airlineMatch = !cleanedValue.includes(airlineInput);
+      if (airlineInput) { // فقط إذا كان هناك إدخال
+        if (airlineValue === "IN") {
+          airlineMatch = cleanedValue.includes(airlineInput);
+        } else if (airlineValue === "NOT IN") {
+          airlineMatch = !cleanedValue.includes(airlineInput);
+        }
       }
     }
     let supplierMatch = true;
@@ -81,7 +83,7 @@ searchBtn.addEventListener("click", function (stop) {
     if (marketSelect && marketSelect !== "select") {
       marketMatch = item.COUNTRY_NAMES.includes(marketSelect);
     }
-    return (airlineMatch && supplierMatch && marketMatch);
+    return (airlineMatch || !airlineInput) && supplierMatch && marketMatch;;
   });
   discounts.sort((a, b) => {
     const aAirlineRule = a.Rules.find(rule => rule.ATTRIBUTE_NAME === "airlineCode");
