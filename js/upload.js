@@ -41,6 +41,7 @@ uploadBtn.addEventListener('click', function (stop) {
                         MARKUP_VALUE: row.MARKUP_VALUE,
                         COUNTRY_NAMES: row.COUNTRY_NAMES,
                         BRANCHNAMES: row.BRANCHNAMES,
+                        AGENCYNAMES:row.AGENCYNAMES,
                         MARKUP_TYPE: row.MARKUP_TYPE,
                         Rules: []
                     };
@@ -73,6 +74,7 @@ uploadBtn.addEventListener('click', function (stop) {
                 })
                 .then(() => {
                     alert('Data saved successfully!');
+                    window.location='index.html'
                 })
                 .catch((error) => {
                     alert('Error saving data:', error);

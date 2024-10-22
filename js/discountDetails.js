@@ -95,7 +95,7 @@ function displayDiscountDetails(details) {
     </div>
     <div class="col-6 mt-4">
     <label class="form-label">Agancies:</label>
-      <textarea class="form-control border border-dark" rows="5" readonly>All</textarea>
+      <textarea class="form-control border border-dark" rows="5" readonly>${details.AGENCYNAMES}</textarea>
     </div>
     <div class="col-6 mt-4">
     <label class="form-label">Amount:</label>
