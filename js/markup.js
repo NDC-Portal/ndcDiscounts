@@ -55,7 +55,7 @@ searchBtn.addEventListener("click", function (stop) {
         let airlineMatch = true;
         if (airlineRules.length > 0) { // إذا كان هناك قواعد للخطوط الجوية
             const airlineValue = airlineRules[0].VALUE;
-            const cleanedValue = airlineRules[0].CLEANED_CRITERIA_VALUE;
+            const cleanedValue = airlineRules[0].CLEANED_CRITERIA_VALUE.toUpperCase();
             if (airlineInput) { // فقط إذا كان هناك إدخال
                 if (airlineValue === "IN") {
                     airlineMatch = cleanedValue.includes(airlineInput);
