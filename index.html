@@ -43,11 +43,11 @@
             <div class="container my-5 border border-dark p-5">
                 <form>
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
                             <label for="airline" class="form-label">Airline Code:</label>
                             <input type="text" class="form-control airline" placeholder="Enter airline code">
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
                             <label for="supplier" class="form-label">Supplier:</label>
                             <select class="form-select supplier" name="supplier">
                                 <option>select</option>
@@ -72,7 +72,7 @@
                                 <option value="FlyNas">FlyNas</option>
                             </select>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
                             <label for="market" class="form-label">Market:</label>
                             <select class="form-select market" name="market">
                                 <option>select</option>
@@ -82,6 +82,22 @@
                                 <option value="Libya">Libya</option>
                                 <option value="Saudi Arabia">Saudi Arabia</option>
 
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <label for="pcc" class="form-label">Pcc:</label>
+                            <select class="form-select pcc" name="supplier">
+                                <option>select</option>
+                                <option value="EGYAmadeus">EGY Amadeus</option>
+                                <option value="EGYGalileo">EGY Galileo</option>
+                                <option value="EGYimportpnrGalile">EGY importpnr Galile</option>
+                                <option value="EGYSabre">EGY Sabre</option>
+                                <option value="KSAAmadeus">KSA Amadeus</option>
+                                <option value="KSAGalileo">KSA Galileo</option>
+                                <option value="KSAimportpnrGalile">KSA importpnr Galile</option>
+                                <option value="UAEAmadeus">UAE Amadeus</option>
+                                <option value="UAEGalileo">UAE Galileo</option>
+                                <option value="UAEimportpnrGalile">UAE importpnr Galile</option>
                             </select>
                         </div>
                         <div class="col-12 text-center my-5">
@@ -97,13 +113,13 @@
                 <thead>
                     <tr>
                         <th>Disc_Code</th>
-                        <th>Name</th>
                         <th>Validity_From</th>
                         <th>Validity_To</th>
                         <th>Country</th>
                         <th>AirLine_Rule</th>
                         <th>AirLine</th>
                         <th>Supplier</th>
+                        <th>Pcc</th>
                         <th>Value</th>
                         <th>Action</th>
                     </tr>

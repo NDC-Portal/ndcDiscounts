@@ -51,6 +51,7 @@ searchBtn.addEventListener("click", function (stop) {
   const airlineInput = document.querySelector(".airline").value.toUpperCase();
   const supplierSelect = document.querySelector(".supplier").value;
   const marketSelect = document.querySelector(".market").value;
+  const pccSelect = document.querySelector(".pcc").value
   console.log("Airline Code Entered:", airlineInput);
   console.log("Supplier Selected:", supplierSelect);
   console.log("Market Selected:", marketSelect);
@@ -61,6 +62,7 @@ searchBtn.addEventListener("click", function (stop) {
     const supplierRules = item.Rules.filter(
       (rule) => rule.ATTRIBUTE_NAME === "supplier"
     );
+    const pccRules = item.Rules.filter((rule) => rule.ATTRIBUTE_NAME === "pcc")
     let airlineMatch = true;
     if (airlineRules.length > 0) { // إذا كان هناك قواعد للخطوط الجوية
       const airlineValue = airlineRules[0].VALUE;
@@ -83,7 +85,14 @@ searchBtn.addEventListener("click", function (stop) {
     if (marketSelect && marketSelect !== "select") {
       marketMatch = item.COUNTRY_NAMES.includes(marketSelect);
     }
-    return (airlineMatch || !airlineInput) && supplierMatch && marketMatch;;
+    let pccMatch=true
+    if(pccSelect && pccSelect!=="select"){
+      if(pccRules.length>0){
+        const pccValues=pccRules[0].CLEANED_CRITERIA_VALUE.split(",")
+        pccMatch=pccValues.includes(pccSelect)
+      }
+    }
+    return (airlineMatch || !airlineInput) && supplierMatch && pccMatch && marketMatch;
   });
   discounts.sort((a, b) => {
     const aAirlineRule = a.Rules.find(rule => rule.ATTRIBUTE_NAME === "airlineCode");
@@ -128,37 +137,46 @@ function drawDisc(discounts) {
     const airlineRule = item.Rules.filter(
       (rule) => rule.ATTRIBUTE_NAME == "airlineCode" || rule.ATTRIBUTE_NAME == "airlineName"
     );
+    const pccRule = item.Rules.filter(
+      (rule) => rule.ATTRIBUTE_NAME == "pcc"
+    );
     const airlineValue =
       airlineRule.length > 0 ? airlineRule[0].VALUE : "IN";
     const airlineCleanedValue =
       airlineRule.length > 0 ? airlineRule[0].CLEANED_CRITERIA_VALUE : "All";
     const supplierCleanedValue =
       supplierRule.length > 0 ? supplierRule[0].CLEANED_CRITERIA_VALUE : "All";
-
+    const pccCleanedValue =
+      pccRule.length > 0
+        ? pccRule[0].CLEANED_CRITERIA_VALUE.split(",").slice(0, 3).join(", ") + (pccRule[0].CLEANED_CRITERIA_VALUE.split(",").length > 3 ? ", ...more" : "")
+        : "All";
+    const pccDeatails=pccRule.length>0?pccRule[0].CLEANED_CRITERIA_VALUE:"All"    
 
     console.log(airlineRule);
     const valueType = item.MARKUP_TYPE == 0 ? '%' : ""
     return `
         <tr>
         <td>${item.RULES_UID}</td>
-        <td>${item.RULE_NAME}</td>
         <td>${item.RULE_START_DATE}</td>
         <td>${item.RULE_END_DATE}</td>
         <td>${item.COUNTRY_NAMES}</td>
         <td>${airlineValue}</td>
         <td>${airlineCleanedValue}</td>
         <td>${supplierCleanedValue}</td>
+        <td style="cursor: pointer;" onclick="alert('${pccDeatails}')">${pccCleanedValue}</td>
         <td>${formatNumber(item.MARKUP_VALUE)}${valueType}</td>
         <td><i class="btn btn-success fas fa-eye" data-uid='${item.RULES_UID}'></i></td>
         </tr>
         `;
+    /////////////////////////////////
+    //show pcc func
   });
   console.log(table);
   console.log(discount);
   table.innerHTML = discount.join("");
   const eyeIcons = document.querySelectorAll(".fa-eye");
   eyeIcons.forEach(icon => {
-    icon.addEventListener("click", function() {
+    icon.addEventListener("click", function () {
       const uid = icon.getAttribute('data-uid');
       window.location.href = `discountDetails.html?uid=${uid}`; // الانتقال إلى صفحة التفاصيل
     });
