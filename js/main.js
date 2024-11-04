@@ -157,7 +157,7 @@ function drawDisc(discounts) {
     return `
         <tr>
         <td>${item.RULES_UID}</td>
-        <td>${item.RULE_START_DATE}</td>
+        <td>${item.RULE_NAME}</td>
         <td>${item.RULE_END_DATE}</td>
         <td>${item.COUNTRY_NAMES}</td>
         <td>${airlineValue}</td>

@@ -148,7 +148,7 @@ function drawDisc(markups) {
         return `
           <tr>
           <td>${item.RULES_UID}</td>
-          <td>${item.RULE_START_DATE}</td>
+          <td>${item.RULE_NAME}</td>
           <td>${item.RULE_END_DATE}</td>
           <td style="cursor: pointer;" onclick="alert('${item.COUNTRY_NAMES}')">${countryCleandValue}</td>
           <td>${airlineValue}</td>
