@@ -111,12 +111,17 @@ function displayDiscountDetails(details) {
     `
 }
 function formatNumber(num) {
-    const parsedNum = parseFloat(num);
-    if (isNaN(parsedNum)) return ''; // إذا لم يكن رقمًا، ارجع سلسلة فارغة
-  
-    // استخدم toString() لتحويل الرقم إلى سلسلة، ثم أزل الأصفار الزائدة
-    return parsedNum.toString().replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
-  }
+  if (!num) return "";
+
+  // Remove commas from values like "1,280"
+  const cleaned = num.toString().replace(/,/g, "");
+
+  const parsedNum = parseFloat(cleaned);
+  if (isNaN(parsedNum)) return "";
+
+  return parsedNum.toString();
+}
+
 
 // Fetch the discount details on page load
 window.onload = () => {

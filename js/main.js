@@ -117,11 +117,13 @@ searchBtn.addEventListener("click", function (stop) {
 let currentPage = 1;
 const itemsPerPage = 10;
 function formatNumber(num) {
-  const parsedNum = parseFloat(num);
-  if (isNaN(parsedNum)) return ''; // إذا لم يكن رقمًا، ارجع سلسلة فارغة
+  if (!num) return "";
+  const cleaned = num.replace(/,/g, ""); // شيل كل الفواصل
+  const parsedNum = parseFloat(cleaned);
 
-  // استخدم toString() لتحويل الرقم إلى سلسلة، ثم أزل الأصفار الزائدة
-  return parsedNum.toString().replace(/\.0+$/, '').replace(/(\.\d*[1-9])0+$/, '$1');
+  if (isNaN(parsedNum)) return "";
+
+  return parsedNum.toString();
 }
 //fun to draw table for discounts
 function drawDisc(discounts) {
@@ -202,5 +204,6 @@ document.getElementById("nextButton").addEventListener("click", () => {
     drawDisc(discounts);
   }
 });
+
 ////////////////////////////////////
 window.onload = fetchDiscounts;
